@@ -1,359 +1,585 @@
-/* ===== GLOBAL ===== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
-body{
-font-family:Segoe UI, Arial;
-margin:0;
-background:#f3f5f7;
-color:#222;
+/* ===== VARIABLES ===== */
+:root {
+    --navy: #0a0f1e;
+    --navy2: #111827;
+    --blue: #2563eb;
+    --blue-light: #3b82f6;
+    --sky: #38bdf8;
+    --gold: #f59e0b;
+    --white: #ffffff;
+    --gray: #94a3b8;
+    --light: #f1f5f9;
+    --card-bg: rgba(255,255,255,0.97);
+    --shadow: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 16px;
 }
 
-h1,h2,h3,p{
-margin:0;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-button{
-cursor:pointer;
+/* ===== ANIMATED BACKGROUND ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(37,99,235,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(56,189,248,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(245,158,11,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    animation: bgShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift {
+    0% { opacity: 1; }
+    100% { opacity: 0.7; transform: scale(1.05); }
+}
+
+/* ===== FLOATING DOTS ===== */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* ===== HEADER ===== */
-
-.header{
-background:white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 40px;
-box-shadow:0 2px 6px rgba(0,0,0,0.08);
-position:sticky;
-top:0;
-z-index:100;
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 48px;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.logo{
-font-size:26px;
-font-weight:bold;
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    letter-spacing: -0.5px;
 }
 
-.red{color:#ff3b5c;}
-.blue{color:#007bff;}
+.red { color: #ef4444; }
+.blue { color: var(--sky); }
 
-.header-right{
-display:flex;
-gap:12px;
-align-items:center;
+.header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-.header-btn{
-background:white;
-border:1px solid #ddd;
-padding:8px 14px;
-border-radius:10px;
+.header-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white);
+    padding: 9px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    transition: all 0.2s;
 }
 
-/* ===== MENU DROPDOWN ===== */
-
-.menu-section{
-position:relative;
+.header-btn:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.25);
 }
 
-.menu-dropdown{
-display:none;
-position:absolute;
-right:0;
-top:45px;
-background:white;
-box-shadow:0 8px 18px rgba(0,0,0,0.15);
-border-radius:12px;
-overflow:hidden;
-min-width:200px;
+/* ===== LANGUAGE DROPDOWN ===== */
+.lang-section {
+    position: relative;
 }
 
-.menu-dropdown a{
-display:block;
-padding:12px 16px;
-text-decoration:none;
-color:#333;
-}
-
-.menu-dropdown a:hover{
-background:#f2f6ff;
-}
-
-.menu-section:hover .menu-dropdown{
-display:block;
-}
-
-/* ===== HERO TEXT ===== */
-
-.hero-text{
-padding:40px;
-}
-
-.hero-text h1{
-font-size:36px;
-margin-bottom:10px;
-}
-
-/* ===== SEARCH BAR ===== */
-
-.search-container{
-background:white;
-margin:0 40px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-display:flex;
-align-items:center;
-padding:10px;
-gap:10px;
-}
-
-.search-item{
-display:flex;
-flex-direction:column;
-padding:10px;
-border-right:1px solid #eee;
-}
-
-.search-item:last-child{
-border-right:none;
-}
-
-.label{
-font-size:12px;
-color:#777;
-}
-
-input,select{
-border:none;
-outline:none;
-font-size:15px;
-}
-
-.search-btn{
-background:#007bff;
-color:white;
-border:none;
-padding:14px 28px;
-border-radius:14px;
-font-size:16px;
-}
-
-/* ===== MAIN LAYOUT ===== */
-
-.main-layout{
-display:flex;
-max-width:1200px;
-margin:40px auto;
-gap:20px;
-}
-
-/* ===== FILTER SIDEBAR ===== */
-
-.filters{
-width:260px;
-background:white;
-padding:20px;
-border-radius:16px;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
-height:fit-content;
-position:sticky;
-top:100px;
-}
-
-.filters label{
-font-weight:bold;
-display:block;
-margin-top:14px;
-}
-
-.filters hr{
-margin:14px 0;
-border:none;
-border-top:1px solid #eee;
-}
-
-/* ===== SUMMARY BAR ===== */
-
-.summary-bar{
-background:white;
-max-width:1200px;
-margin:20px auto;
-padding:15px 20px;
-border-radius:14px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.sort-btn{
-background:#eef2f7;
-border:none;
-padding:8px 14px;
-border-radius:8px;
-}
-
-/* ===== RESULTS ===== */
-
-.results{
-flex:1;
-}
-
-/* ===== PREMIUM FLIGHT CARD ===== */
-
-.flight-card{
-background:white;
-padding:22px;
-border-radius:18px;
-margin-bottom:16px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
-transition:0.2s;
-}
-
-.flight-card:hover{
-transform:translateY(-3px);
-}
-
-/* airline block */
-
-.flight-airline{
-width:25%;
-}
-
-.flight-airline h3{
-margin-bottom:4px;
-}
-
-/* timeline */
-
-.flight-timeline{
-display:flex;
-align-items:center;
-gap:15px;
-width:45%;
-justify-content:center;
-}
-
-.time{
-font-size:22px;
-font-weight:bold;
-}
-
-.airport{
-font-size:12px;
-color:#777;
-}
-
-.timeline-line{
-text-align:center;
-}
-
-.line{
-width:140px;
-height:2px;
-background:#ccc;
-margin:6px 0;
-position:relative;
-}
-
-.line:after{
-content:"✈";
-position:absolute;
-right:-8px;
-top:-8px;
-font-size:14px;
-}
-
-.duration{
-font-size:12px;
-color:#777;
-}
-
-.stops{
-font-size:12px;
-color:#007bff;
-}
-
-/* price */
-
-.flight-price{
-text-align:right;
-}
-
-.price{
-font-size:28px;
-font-weight:bold;
-margin-bottom:8px;
-}
-
-.deal-btn{
-background:#007bff;
-color:white;
-padding:10px 18px;
-border-radius:10px;
-text-decoration:none;
-display:inline-block;
-}
-
-/* ===== PARTNERS ===== */
-
-.partners{
-text-align:center;
-margin-top:40px;
-color:#777;
-display:flex;
-justify-content:center;
-gap:40px;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media(max-width:900px){
-
-.main-layout{
-flex-direction:column;
-}
-
-.filters{
-width:100%;
-position:static;
-}
-
-.flight-card{
-flex-direction:column;
-align-items:flex-start;
-gap:15px;
-}
-
-.flight-timeline{
-width:100%;
-justify-content:space-between;
-}
-
-}
-/* ===== MENU DROPDOWN FIX ===== */
-
-/* hide dropdown by default - remove hover trigger */
-.menu-section:hover .menu-dropdown {
+.lang-dropdown {
     display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 160px;
+    z-index: 999;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
 }
 
-/* show only when .open class is added by JS */
-.menu-dropdown.open {
-    display: block !important;
+.lang-dropdown a {
+    display: block;
+    padding: 11px 16px;
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.15s;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.lang-dropdown a:last-child { border-bottom: none; }
+.lang-dropdown a:hover { background: rgba(255,255,255,0.07); color: var(--white); }
+.lang-dropdown a.active { color: var(--sky); }
+
+/* ===== MENU SECTION ===== */
+.menu-section { position: relative; }
+
+.menu-section:hover .menu-dropdown { display: none; }
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    min-width: 210px;
+    z-index: 999;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
 }
 
 .menu-dropdown a {
-    cursor: pointer;
+    display: block;
+    padding: 13px 18px;
+    text-decoration: none;
+    color: var(--gray);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: 0.15s;
+    font-size: 14px;
 }
-/* ===== PAGE CONTAINER (for favourites, recent, bookings pages) ===== */
+
+.menu-dropdown a:last-child { border-bottom: none; }
+.menu-dropdown a:hover { background: rgba(255,255,255,0.07); color: var(--white); padding-left: 22px; }
+
+/* ===== HERO ===== */
+.hero-text {
+    position: relative;
+    z-index: 1;
+    padding: 70px 48px 40px;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.15;
+    background: linear-gradient(135deg, #ffffff 0%, var(--sky) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 14px;
+}
+
+.hero-text p {
+    color: var(--gray);
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* ===== SEARCH CONTAINER ===== */
+.search-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,0.97);
+    margin: 0 48px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1);
+    overflow: hidden;
+    color: var(--navy);
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px;
+    flex: 1;
+    border-right: 1px solid #e2e8f0;
+}
+
+.search-item:last-of-type { border-right: none; }
+
+.label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+}
+
+.search-item input,
+.search-item select {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--navy);
+    background: transparent;
+    font-weight: 500;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
+    color: white;
+    border: none;
+    padding: 0 36px;
+    height: 100%;
+    min-height: 72px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+    transform: scale(1.02);
+}
+
+/* ===== SUMMARY BAR ===== */
+.summary-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 48px 0;
+    padding: 14px 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: var(--white);
+    font-size: 14px;
+}
+
+.sort-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    padding: 7px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    margin-left: 8px;
+    transition: 0.2s;
+}
+
+.sort-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ===== MAIN LAYOUT ===== */
+.main-layout {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    max-width: 1300px;
+    margin: 32px auto;
+    gap: 24px;
+    padding: 0 48px;
+}
+
+/* ===== FILTER SIDEBAR ===== */
+.filters {
+    width: 270px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 24px;
+    border-radius: var(--radius);
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+    color: var(--white);
+}
+
+.filters h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--sky);
+    letter-spacing: 0.3px;
+}
+
+.filters label {
+    font-weight: 600;
+    display: block;
+    margin-top: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--gray);
+}
+
+.filters hr {
+    margin: 16px 0;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.filters input[type="range"] {
+    width: 100%;
+    margin-top: 8px;
+    accent-color: var(--sky);
+}
+
+.filters select {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white);
+    padding: 9px 12px;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+}
+
+#airlineContainer div {
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+#airlineContainer input[type="checkbox"] {
+    accent-color: var(--sky);
+    margin-right: 8px;
+}
+
+/* ===== RESULTS ===== */
+.results { flex: 1; }
+
+/* ===== FLIGHT CARD ===== */
+.flight-card {
+    background: var(--card-bg);
+    padding: 22px 24px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    color: var(--navy);
+    transition: transform 0.2s, box-shadow 0.2s;
+    gap: 16px;
+}
+
+.flight-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+
+.flight-airline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 22%;
+}
+
+.airline-logo {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 4px;
+    background: white;
+}
+
+.flight-airline h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+}
+
+.flight-timeline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    justify-content: center;
+}
+
+.time-block { text-align: center; }
+
+.time {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+}
+
+.airport {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.timeline-line { text-align: center; flex: 1; }
+
+.line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue-light), var(--sky));
+    margin: 6px 0;
+    border-radius: 2px;
+    position: relative;
+}
+
+.line::after {
+    content: "✈";
+    position: absolute;
+    right: -6px;
+    top: -9px;
+    font-size: 14px;
+    color: var(--blue);
+}
+
+.duration { font-size: 12px; color: #64748b; }
+.stops { font-size: 12px; font-weight: 600; margin-top: 2px; }
+
+.flight-price {
+    text-align: right;
+    min-width: 130px;
+}
+
+.price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.deal-btn {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
+    color: white;
+    padding: 9px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.deal-btn:hover { opacity: 0.9; transform: scale(1.03); }
+
+/* ===== FAVOURITE / REMOVE BUTTONS ===== */
+.fav-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 7px 11px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.fav-btn:hover, .fav-btn.faved {
+    background: #fff0f5;
+    border-color: #fda4af;
+}
+
+.remove-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 7px 11px;
+    border-radius: 9px;
+    cursor: pointer;
+    color: #94a3b8;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.remove-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+/* ===== PARTNERS ===== */
+.partners {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    color: rgba(255,255,255,0.3);
+    font-size: 14px;
+    font-weight: 500;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* ===== SKELETON ===== */
+.skeleton {
+    height: 110px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 16px;
+    border-radius: var(--radius);
+    animation: shimmer 1.4s infinite;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+@keyframes shimmer {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* ===== MODAL ===== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* ===== PAGE CONTAINER ===== */
 .page-container {
+    position: relative;
+    z-index: 1;
     max-width: 1000px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 0 48px;
 }
 
 .page-header {
@@ -365,112 +591,49 @@ justify-content:space-between;
 }
 
 .page-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--white);
     margin: 0;
-    font-size: 26px;
 }
 
-.page-header p {
-    margin: 0;
-    color: #888;
-    font-size: 14px;
-    flex: 1;
-}
+.page-header p { margin: 0; color: var(--gray); font-size: 14px; flex: 1; }
 
-/* ===== CLEAR BUTTON ===== */
 .clear-btn {
-    background: white;
-    border: 1px solid #ddd;
+    background: transparent;
+    border: 1px solid rgba(239,68,68,0.4);
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 9px;
     cursor: pointer;
-    color: #e74c3c;
+    color: #ef4444;
     font-size: 13px;
-}
-
-.clear-btn:hover {
-    background: #fff0f0;
-}
-
-/* ===== REMOVE BUTTON ===== */
-.remove-btn {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #999;
-    font-size: 12px;
-}
-
-.remove-btn:hover {
-    background: #fff0f0;
-    color: #e74c3c;
-    border-color: #e74c3c;
-}
-
-/* ===== FAVOURITE HEART BUTTON ===== */
-.fav-btn {
-    background: white;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+    font-family: 'Outfit', sans-serif;
     transition: 0.2s;
 }
 
-.fav-btn:hover {
-    background: #fff0f5;
-    border-color: #e74c3c;
-}
-
-.fav-btn.faved {
-    background: #fff0f5;
-    border-color: #e74c3c;
-}
+.clear-btn:hover { background: rgba(239,68,68,0.1); }
 
 /* ===== EMPTY STATE ===== */
 .empty-state {
     text-align: center;
     padding: 80px 20px;
-    color: #888;
+    color: var(--gray);
 }
 
-.empty-state p {
-    font-size: 18px;
-    margin-bottom: 8px;
-}
+.empty-state p { font-size: 17px; margin-bottom: 8px; }
 
-/* ===== MENU DROPDOWN (override hover, use JS only) ===== */
-.menu-section:hover .menu-dropdown {
-    display: none;
-}
-
-.menu-dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 45px;
-    background: white;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    border-radius: 12px;
-    overflow: hidden;
-    min-width: 200px;
-    z-index: 999;
-}
-
-.menu-dropdown a {
-    display: block;
-    padding: 13px 16px;
-    text-decoration: none;
-    color: #333;
-    border-bottom: 1px solid #f0f0f0;
-    transition: 0.15s;
-}
-
-.menu-dropdown a:last-child { border-bottom: none; }
-
-.menu-dropdown a:hover {
-    background: #f2f6ff;
-    padding-left: 20px;
+/* ===== RESPONSIVE ===== */
+@media(max-width: 900px){
+    .header { padding: 14px 20px; }
+    .hero-text { padding: 40px 20px 24px; }
+    .search-container { margin: 0 20px; flex-direction: column; border-radius: 16px; }
+    .search-item { border-right: none; border-bottom: 1px solid #e2e8f0; }
+    .search-btn { width: 100%; min-height: 52px; }
+    .main-layout { flex-direction: column; padding: 0 20px; }
+    .filters { width: 100%; position: static; }
+    .flight-card { flex-direction: column; align-items: flex-start; }
+    .flight-timeline { width: 100%; }
+    .flight-price { text-align: left; }
+    .partners { padding: 24px 20px; gap: 20px; flex-wrap: wrap; }
+    .page-container { padding: 0 20px; }
 }
