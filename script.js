@@ -226,3 +226,47 @@ function showRecent(){
     let rec = JSON.parse(localStorage.getItem("recentFlights")) || [];
     alert(rec.length ? "Recently viewed: " + rec.map(f => f.airline).join(", ") : "No recent searches");
 }
+/* ===== MENU TOGGLE (click-based) ===== */
+
+document.querySelector(".menu-section .header-btn").addEventListener("click", function(e){
+    e.stopPropagation();
+    const dropdown = document.querySelector(".menu-dropdown");
+    dropdown.classList.toggle("open");
+});
+
+/* close menu when clicking anywhere else */
+document.addEventListener("click", function(){
+    document.querySelector(".menu-dropdown").classList.remove("open");
+});
+
+/* stop clicks inside dropdown from closing it */
+document.querySelector(".menu-dropdown").addEventListener("click", function(e){
+    e.stopPropagation();
+});
+
+/* ===== FAVOURITES ===== */
+
+function showFav(){
+    let fav = JSON.parse(localStorage.getItem("favs")) || [];
+    document.querySelector(".menu-dropdown").classList.remove("open");
+    if(fav.length === 0){
+        alert("No favourites saved yet.\nSearch for flights and click ⭐ to save them.");
+    } else {
+        alert("Your Favourite Flights:\n\n" + fav.join("\n"));
+    }
+}
+
+/* ===== RECENTLY VIEWED ===== */
+
+function showRecent(){
+    let rec = JSON.parse(localStorage.getItem("recentFlights")) || [];
+    document.querySelector(".menu-dropdown").classList.remove("open");
+    if(rec.length === 0){
+        alert("No recently viewed flights yet.\nSearch for a route first.");
+    } else {
+        let text = rec.map(f =>
+            `${f.airline} | ${f.departure_code || ""} → ${f.arrival_code || ""} | ₹${Math.round(f.price).toLocaleString("en-IN")}`
+        ).join("\n");
+        alert("Recently Viewed Flights:\n\n" + text);
+    }
+}
