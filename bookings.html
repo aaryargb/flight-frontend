@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkyRoute — My Bookings</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="header">
-  <div class="logo"><a href="index.html" style="text-decoration:none"><span class="red">Sk</span><span class="blue">yRoute</span></a></div>
+  <div class="logo"><a href="index.html" style="text-decoration:none"><span class="red">Sky</span><span class="blue">Route</span></a></div>
   <div class="header-right">
-    <button class="header-btn" onclick="location.href='index.html'">← Search</button>
+    <button class="header-btn" onclick="location.href='index.html'">← Search flights</button>
     <div class="menu-section">
       <button class="header-btn" id="menuToggleBtn">☰ Menu</button>
       <div class="menu-dropdown" id="menuDropdown">
@@ -24,7 +26,7 @@
     <h2>📖 My Bookings</h2>
     <p>Flights booked through SkyRoute</p>
   </div>
-  <div id="bookingResults"></div>
+  <div id="bookingResults" style="display:flex;flex-direction:column;gap:14px"></div>
 </div>
 <script src="script.js"></script>
 <script>renderBookingsPage();</script>
