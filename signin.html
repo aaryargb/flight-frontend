@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SkyRoute — Sign In</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.signin-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.signin-card {
+    background: rgba(17,24,39,0.95);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.signin-logo {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.signin-logo .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+}
+
+.signin-logo p {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.tab-btns {
+    display: flex;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.tab-btn.active {
+    background: var(--blue);
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 13px 16px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--sky);
+    background: rgba(56,189,248,0.06);
+}
+
+.forgot-link {
+    text-align: right;
+    margin-bottom: 24px;
+}
+
+.forgot-link a {
+    color: var(--sky);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.forgot-link a:hover { text-decoration: underline; }
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 20px;
+}
+
+.submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: #475569;
+    font-size: 13px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+}
+
+.google-btn {
+    width: 100%;
+    padding: 13px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 24px;
+}
+
+.google-btn:hover { background: rgba(255,255,255,0.1); }
+
+.bottom-link {
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.bottom-link a { color: var(--sky); text-decoration: none; }
+.bottom-link a:hover { text-decoration: underline; }
+
+.back-home {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-home a {
+    color: #475569;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.back-home a:hover { color: var(--gray); }
+
+/* FORGOT PASSWORD PANEL */
+.forgot-panel { display: none; }
+.forgot-panel.show { display: block; }
+.signin-panel { display: block; }
+.signin-panel.hide { display: none; }
+.signup-panel { display: none; }
+.signup-panel.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="signin-page">
+  <div class="signin-card">
+
+    <div class="signin-logo">
+      <div class="logo-text"><span class="red">Sk</span><span class="blue">yRoute</span></div>
+      <p>Your smart flight comparison platform</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-btns" id="authTabs">
+      <button class="tab-btn active" onclick="showTab('signin')">Sign In</button>
+      <button class="tab-btn" onclick="showTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- SIGN IN PANEL -->
+    <div class="signin-panel" id="signinPanel">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="signinEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="signinPass" placeholder="Enter your password">
+      </div>
+      <div class="forgot-link">
+        <a href="#" onclick="showForgot()">Forgot password?</a>
+      </div>
+      <button class="submit-btn" onclick="handleSignin()">Sign In</button>
+      <div class="divider">or continue with</div>
+      <button class="google-btn">🌐 Continue with Google</button>
+      <div class="bottom-link">
+        Don't have an account? <a href="#" onclick="showTab('signup')">Sign up free</a>
+      </div>
+    </div>
+
+    <!-- SIGN UP PANEL -->
+    <div class="signup-panel" id="signupPanel">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Create a password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Repeat your password">
+      </div>
+      <button class="submit-btn" style="margin-top:8px">Create Account</button>
+      <div class="divider">or continue with</div>
+      <button class="google-btn">🌐 Continue with Google</button>
+      <div class="bottom-link">
+        Already have an account? <a href="#" onclick="showTab('signin')">Sign in</a>
+      </div>
+    </div>
+
+    <!-- FORGOT PASSWORD PANEL -->
+    <div class="forgot-panel" id="forgotPanel">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:40px;margin-bottom:12px">🔑</div>
+        <h3 style="color:white;font-size:20px;margin-bottom:6px">Reset your password</h3>
+        <p style="color:#64748b;font-size:14px">Enter your email and we'll send you a reset link</p>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <button class="submit-btn">Send Reset Link</button>
+      <div class="bottom-link" style="margin-top:8px">
+        <a href="#" onclick="showTab('signin')">← Back to Sign In</a>
+      </div>
+    </div>
+
+    <div class="back-home">
+      <a href="index.html">← Back to SkyRoute</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(tab){
+    document.getElementById('signinPanel').style.display = tab === 'signin' ? 'block' : 'none';
+    document.getElementById('signupPanel').style.display = tab === 'signup' ? 'block' : 'none';
+    document.getElementById('forgotPanel').style.display = 'none';
+    document.getElementById('authTabs').style.display = 'flex';
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+        b.classList.toggle('active', (tab === 'signin' && i === 0) || (tab === 'signup' && i === 1));
+    });
+}
+
+function showForgot(){
+    document.getElementById('signinPanel').style.display = 'none';
+    document.getElementById('signupPanel').style.display = 'none';
+    document.getElementById('forgotPanel').style.display = 'block';
+    document.getElementById('authTabs').style.display = 'none';
+}
+
+function handleSignin(){
+    const email = document.getElementById('signinEmail').value;
+    const pass = document.getElementById('signinPass').value;
+    if(!email || !pass){ alert('Please fill in all fields'); return; }
+    alert('Sign in successful! (Demo mode)');
+    location.href = 'index.html';
+}
+</script>
+</body>
+</html>
