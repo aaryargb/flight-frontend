@@ -13,7 +13,7 @@
   <div class="logo"><span class="red">Sky</span><span class="blue">Route</span></div>
   <div class="header-right">
     <div class="lang-section">
-      <button class="header-btn" id="langToggleBtn">🌐 EN ₹</button>
+      <button class="header-btn" id="langToggleBtn"> EN ₹</button>
       <div class="lang-dropdown" id="langDropdown">
         <a href="#" class="active" onclick="setLang('EN ₹')">🇮🇳 English · INR</a>
         <a href="#" onclick="setLang('HI ₹')">🇮🇳 हिंदी · INR</a>
@@ -22,7 +22,7 @@
         <a href="#" onclick="setLang('EN €')">🇪🇺 English · EUR</a>
       </div>
     </div>
-    <button class="header-btn primary" onclick="location.href='signin.html'">👤 Sign in</button>
+    <button class="header-btn primary" onclick="location.href='signin.html'">Sign in</button>
     <div class="menu-section">
       <button class="header-btn" id="menuToggleBtn">☰ Menu</button>
       <div class="menu-dropdown" id="menuDropdown">
@@ -46,42 +46,152 @@
 <!-- SEARCH BAR -->
 <div class="search-wrapper">
   <div class="search-tabs">
-    <button class="search-tab active" onclick="setTab('oneway')">✈ One way</button>
-    <button class="search-tab" onclick="setTab('return')">⇄ Return</button>
-    <button class="search-tab" onclick="setTab('multi')">+ Multi-city</button>
+    <button class="search-tab active" id="tab-oneway" onclick="setTab('oneway')">✈ One way</button>
+    <button class="search-tab" id="tab-return" onclick="setTab('return')">⇄ Return</button>
+    <button class="search-tab" id="tab-multi" onclick="setTab('multi')">+ Multi-city</button>
   </div>
-  <div class="search-container">
+
+  <!-- ONE WAY -->
+  <div class="search-container" id="form-oneway">
     <div class="search-item">
       <span class="label">From</span>
-      <input id="dep" placeholder="City or airport (e.g. DEL)">
+      <input id="dep" placeholder="e.g. DEL">
     </div>
     <div class="search-item">
       <span class="label">To</span>
-      <input id="arr" placeholder="City or airport (e.g. BOM)">
+      <input id="arr" placeholder="e.g. BOM">
     </div>
     <div class="search-item">
       <span class="label">Departure</span>
       <input type="date" id="dateInput">
     </div>
-    <div class="search-item">
+    <div class="search-item traveller-item" onclick="openTravellerPicker('ow')">
       <span class="label">Travellers</span>
-      <select>
-        <option>1 Adult</option>
-        <option>2 Adults</option>
-        <option>1 Adult, 1 Child</option>
-        <option>Family (2+2)</option>
-      </select>
+      <span class="traveller-display" id="ow-traveller-display">1 Adult</span>
     </div>
-    <div class="search-item">
+    <div class="search-item class-item" onclick="openClassPicker('ow')">
       <span class="label">Class</span>
-      <select>
-        <option>Economy</option>
-        <option>Premium Economy</option>
-        <option>Business</option>
-        <option>First Class</option>
-      </select>
+      <span class="class-display" id="ow-class-display">Economy</span>
     </div>
     <button class="search-btn" onclick="searchFlights()">Search flights</button>
+  </div>
+
+  <!-- RETURN -->
+  <div class="search-container" id="form-return" style="display:none">
+    <div class="search-item">
+      <span class="label">From</span>
+      <input id="ret-dep" placeholder="e.g. DEL">
+    </div>
+    <div class="search-item">
+      <span class="label">To</span>
+      <input id="ret-arr" placeholder="e.g. BOM">
+    </div>
+    <div class="search-item">
+      <span class="label">Departure</span>
+      <input type="date" id="ret-date">
+    </div>
+    <div class="search-item">
+      <span class="label">Return</span>
+      <input type="date" id="ret-return-date">
+    </div>
+    <div class="search-item traveller-item" onclick="openTravellerPicker('ret')">
+      <span class="label">Travellers</span>
+      <span class="traveller-display" id="ret-traveller-display">1 Adult</span>
+    </div>
+    <div class="search-item class-item" onclick="openClassPicker('ret')">
+      <span class="label">Class</span>
+      <span class="class-display" id="ret-class-display">Economy</span>
+    </div>
+    <button class="search-btn" onclick="searchReturn()">Search flights</button>
+  </div>
+
+  <!-- MULTI-CITY -->
+  <div id="form-multi" style="display:none">
+    <div id="multiRows"></div>
+    <div style="display:flex;gap:12px;margin-top:12px;padding:0 2px">
+      <div class="search-item traveller-item" onclick="openTravellerPicker('multi')"
+        style="background:white;border:1px solid #e4e8ef;border-radius:12px;flex:0 0 auto;padding:12px 18px;cursor:pointer">
+        <span class="label">Travellers</span>
+        <span class="traveller-display" id="multi-traveller-display">1 Adult</span>
+      </div>
+      <div class="search-item class-item" onclick="openClassPicker('multi')"
+        style="background:white;border:1px solid #e4e8ef;border-radius:12px;flex:0 0 auto;padding:12px 18px;cursor:pointer">
+        <span class="label">Class</span>
+        <span class="class-display" id="multi-class-display">Economy</span>
+      </div>
+      <button class="search-btn" style="flex:1;border-radius:12px;padding:16px" onclick="searchMulti()">Search all flights</button>
+      <button onclick="addMultiRow()" style="background:white;border:1.5px solid #e4e8ef;color:#007aff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;padding:14px 22px;border-radius:12px;cursor:pointer;white-space:nowrap">+ Add flight</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRAVELLER PICKER POPUP -->
+<div id="travellerPickerOverlay" class="picker-overlay" onclick="closeTravellerPicker()"></div>
+<div id="travellerPicker" class="picker-popup">
+  <div class="picker-header">
+    <span>Travellers</span>
+    <button onclick="closeTravellerPicker()">✕</button>
+  </div>
+  <div class="picker-row">
+    <div>
+      <div class="picker-label">Adults</div>
+      <div class="picker-sub">Age 12+</div>
+    </div>
+    <div class="counter">
+      <button onclick="changeCount('adults',-1)">−</button>
+      <span id="adults-count">1</span>
+      <button onclick="changeCount('adults',1)">+</button>
+    </div>
+  </div>
+  <div class="picker-row">
+    <div>
+      <div class="picker-label">Children</div>
+      <div class="picker-sub">Age 2–11</div>
+    </div>
+    <div class="counter">
+      <button onclick="changeCount('children',-1)">−</button>
+      <span id="children-count">0</span>
+      <button onclick="changeCount('children',1)">+</button>
+    </div>
+  </div>
+  <div class="picker-row">
+    <div>
+      <div class="picker-label">Infants</div>
+      <div class="picker-sub">Under 2</div>
+    </div>
+    <div class="counter">
+      <button onclick="changeCount('infants',-1)">−</button>
+      <span id="infants-count">0</span>
+      <button onclick="changeCount('infants',1)">+</button>
+    </div>
+  </div>
+  <button class="picker-done" onclick="closeTravellerPicker()">Done</button>
+</div>
+
+<!-- CLASS PICKER POPUP -->
+<div id="classPickerOverlay" class="picker-overlay" onclick="closeClassPicker()"></div>
+<div id="classPicker" class="picker-popup">
+  <div class="picker-header">
+    <span>Cabin Class</span>
+    <button onclick="closeClassPicker()">✕</button>
+  </div>
+  <div id="classOptions">
+    <div class="class-option active" onclick="selectClass('Economy')">
+      <div class="class-name">Economy</div>
+      <div class="class-desc">Best value, standard seating</div>
+    </div>
+    <div class="class-option" onclick="selectClass('Premium Economy')">
+      <div class="class-name">Premium Economy</div>
+      <div class="class-desc">Extra legroom and comfort</div>
+    </div>
+    <div class="class-option" onclick="selectClass('Business')">
+      <div class="class-name">Business</div>
+      <div class="class-desc">Lie-flat seats, premium meals</div>
+    </div>
+    <div class="class-option" onclick="selectClass('First Class')">
+      <div class="class-name">First Class</div>
+      <div class="class-desc">Ultimate luxury experience</div>
+    </div>
   </div>
 </div>
 
@@ -95,23 +205,18 @@
 
 <!-- MAIN LAYOUT -->
 <div class="main-layout">
-
-  <!-- FILTERS -->
   <div class="filters">
     <div class="filter-title">
       Filters
       <button onclick="resetFilters()">Reset all</button>
     </div>
-
     <div class="filter-section">
       <div class="filter-section-title">Max Price</div>
       <input type="range" min="3000" max="50000" value="50000" id="priceRange" step="500">
       <span id="priceValue">₹50,000</span>
       <div class="price-labels"><span>₹3,000</span><span>₹50,000</span></div>
     </div>
-
     <hr class="filter-divider">
-
     <div class="filter-section">
       <div class="filter-section-title">Sort By</div>
       <select id="sortFilter" onchange="setSortPill(this.value)">
@@ -119,9 +224,7 @@
         <option value="high">Price: High to Low</option>
       </select>
     </div>
-
     <hr class="filter-divider">
-
     <div class="filter-section">
       <div class="filter-section-title">Airlines</div>
       <div id="airlineContainer">
@@ -130,10 +233,7 @@
     </div>
   </div>
 
-  <!-- RESULTS -->
   <div class="results-col">
-
-    <!-- TOP BAR -->
     <div class="results-topbar" id="summaryBar" style="display:none">
       <div class="results-count">
         <span id="routeText" style="font-weight:700;color:#1a1a2e"></span>
@@ -146,7 +246,6 @@
       </div>
     </div>
 
-    <!-- FLIGHT RESULTS -->
     <div id="results">
       <div class="empty-state" style="border:none;background:transparent">
         <div style="font-size:64px;margin-bottom:20px">✈️</div>
@@ -155,7 +254,6 @@
         <p style="margin-top:6px;font-size:13px;color:#9ba3af">Use IATA codes: DEL · BOM · BLR · HYD · MAA · CCU</p>
       </div>
     </div>
-
   </div>
 </div>
 
