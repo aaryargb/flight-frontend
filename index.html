@@ -4,59 +4,45 @@
 <title>SkyRoute Flight Comparison</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- HEADER -->
 <div class="header">
-
-  <div class="logo">
-    <span class="red">Sk</span><span class="blue">yRoute</span>
-  </div>
-
+  <div class="logo"><span class="red">Sk</span><span class="blue">yRoute</span></div>
   <div class="header-right">
-
     <button class="header-btn">🌐 EN ₹</button>
     <button class="header-btn" onclick="openLogin()">👤 Sign in</button>
-
     <div class="menu-section">
-      <button class="header-btn">☰ Menu</button>
-      <div class="menu-dropdown">
-        <a href="#" onclick="showFav()">⭐ Favourites</a>
-        <a href="#" onclick="showRecent()">🕒 Recently viewed</a>
-        <a href="#">📖 My bookings</a>
+      <button class="header-btn" id="menuToggleBtn">☰ Menu</button>
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="favourites.html">⭐ Favourites</a>
+        <a href="recently_viewed.html">🕒 Recently viewed</a>
+        <a href="bookings.html">📖 My bookings</a>
       </div>
     </div>
-
   </div>
 </div>
 
-
-<!-- HERO TEXT -->
+<!-- HERO -->
 <div class="hero-text">
   <h1>Compare flights and save big</h1>
   <p>We compare real-time prices across major airlines</p>
 </div>
 
-
 <!-- SEARCH BAR -->
 <div class="search-container">
-
   <div class="search-item">
     <span class="label">From</span>
     <input id="dep" placeholder="e.g. DEL">
   </div>
-
   <div class="search-item">
     <span class="label">To</span>
     <input id="arr" placeholder="e.g. BOM">
   </div>
-
   <div class="search-item">
     <span class="label">Date</span>
     <input type="date" id="dateInput">
   </div>
-
   <div class="search-item">
     <span class="label">Travellers</span>
     <select>
@@ -65,11 +51,8 @@
       <option>Family</option>
     </select>
   </div>
-
   <button class="search-btn" onclick="searchFlights()">Search</button>
-
 </div>
-
 
 <!-- SUMMARY BAR -->
 <div id="summaryBar" class="summary-bar" style="display:none">
@@ -83,69 +66,48 @@
   </div>
 </div>
 
-
-<!-- MAIN CONTENT LAYOUT -->
+<!-- MAIN LAYOUT -->
 <div class="main-layout">
-
-  <!-- FILTER SIDEBAR -->
   <div class="filters">
-
     <h3>Filter Results</h3>
-
     <label>Price Range</label>
     <input type="range" min="3000" max="50000" value="50000" id="priceRange" step="500">
     <span id="priceValue">₹50,000</span>
-
     <hr>
-
     <label>Airlines</label>
     <div id="airlineContainer"></div>
-
     <hr>
-
     <label>Sort By</label>
     <select id="sortFilter">
       <option value="low">Price: Low to High</option>
       <option value="high">Price: High to Low</option>
     </select>
-
   </div>
-
-  <!-- RESULTS -->
   <div id="results" class="results">
-    <div style="text-align:center; padding:60px; color:#888;">
+    <div style="text-align:center;padding:60px;color:#888;">
       <h3>Enter your route above and click Search</h3>
       <p>Use 3-letter airport codes — e.g. DEL, BOM, BLR, HYD</p>
     </div>
   </div>
-
 </div>
 
-
-<!-- PARTNER LOGOS -->
+<!-- PARTNERS -->
 <div class="partners">
-  <span>IndiGo</span>
-  <span>Air India</span>
-  <span>SpiceJet</span>
-  <span>Vistara</span>
-  <span>Emirates</span>
-  <span>+ more</span>
+  <span>IndiGo</span><span>Air India</span><span>SpiceJet</span>
+  <span>Vistara</span><span>Emirates</span><span>+ more</span>
 </div>
-
 
 <!-- LOGIN MODAL -->
 <div id="loginModal" class="modal">
   <div class="modal-box">
     <h2>Sign in</h2>
-    <input placeholder="Email" type="email">
-    <input placeholder="Password" type="password">
+    <input placeholder="Email" type="email"><br><br>
+    <input placeholder="Password" type="password"><br><br>
     <button class="login-btn">Login</button>
     <button onclick="closeLogin()" class="close-btn">Close</button>
   </div>
 </div>
 
-
 <script src="script.js"></script>
-
 </body>
 </html>
