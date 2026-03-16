@@ -349,3 +349,128 @@ justify-content:space-between;
 .menu-dropdown a {
     cursor: pointer;
 }
+/* ===== PAGE CONTAINER (for favourites, recent, bookings pages) ===== */
+.page-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.page-header h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.page-header p {
+    margin: 0;
+    color: #888;
+    font-size: 14px;
+    flex: 1;
+}
+
+/* ===== CLEAR BUTTON ===== */
+.clear-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #e74c3c;
+    font-size: 13px;
+}
+
+.clear-btn:hover {
+    background: #fff0f0;
+}
+
+/* ===== REMOVE BUTTON ===== */
+.remove-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #999;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background: #fff0f0;
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* ===== FAVOURITE HEART BUTTON ===== */
+.fav-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.fav-btn:hover {
+    background: #fff0f5;
+    border-color: #e74c3c;
+}
+
+.fav-btn.faved {
+    background: #fff0f5;
+    border-color: #e74c3c;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #888;
+}
+
+.empty-state p {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+/* ===== MENU DROPDOWN (override hover, use JS only) ===== */
+.menu-section:hover .menu-dropdown {
+    display: none;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: white;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 200px;
+    z-index: 999;
+}
+
+.menu-dropdown a {
+    display: block;
+    padding: 13px 16px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.15s;
+}
+
+.menu-dropdown a:last-child { border-bottom: none; }
+
+.menu-dropdown a:hover {
+    background: #f2f6ff;
+    padding-left: 20px;
+}
