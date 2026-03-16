@@ -5,12 +5,10 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- HEADER -->
 <div class="header">
   <div class="logo"><a href="index.html" style="text-decoration:none"><span class="red">Sk</span><span class="blue">yRoute</span></a></div>
   <div class="header-right">
-    <button class="header-btn" onclick="location.href='index.html'">← Back to Search</button>
+    <button class="header-btn" onclick="location.href='index.html'">← Search</button>
     <div class="menu-section">
       <button class="header-btn" id="menuToggleBtn">☰ Menu</button>
       <div class="menu-dropdown" id="menuDropdown">
@@ -21,18 +19,14 @@
     </div>
   </div>
 </div>
-
 <div class="page-container">
   <div class="page-header">
     <h2>📖 My Bookings</h2>
-    <p>Flights you have booked through SkyRoute</p>
+    <p>Flights booked through SkyRoute</p>
   </div>
   <div id="bookingResults"></div>
 </div>
-
 <script src="script.js"></script>
-<script>
-  renderBookingsPage();
-</script>
+<script>renderBookingsPage();</script>
 </body>
 </html>
