@@ -1,58 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkyRoute — Sign In</title>
 <link rel="stylesheet" href="style.css">
 <style>
 .signin-page {
     min-height: 100vh;
+    background: linear-gradient(135deg, #e8f1ff 0%, #f4f6f9 50%, #fff7ed 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
-    position: relative;
-    z-index: 1;
 }
 
 .signin-card {
-    background: rgba(17,24,39,0.95);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: white;
+    border: 1px solid #e4e8ef;
     border-radius: 24px;
     padding: 48px 44px;
     width: 100%;
     max-width: 440px;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-    backdrop-filter: blur(20px);
-    animation: slideUp 0.4s ease;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    animation: slideUp 0.35s ease;
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
 }
 
 .signin-logo {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .signin-logo .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
 }
 
 .signin-logo p {
-    color: #64748b;
+    color: #9ba3af;
     font-size: 14px;
     margin-top: 6px;
+    font-weight: 400;
 }
 
-.tab-btns {
+.tab-bar {
     display: flex;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
+    background: #f4f6f9;
+    border-radius: 10px;
     padding: 4px;
     margin-bottom: 28px;
+    gap: 4px;
 }
 
 .tab-btn {
@@ -60,187 +62,173 @@
     padding: 10px;
     border: none;
     background: transparent;
-    color: #64748b;
-    font-family: 'Outfit', sans-serif;
+    color: #5a6070;
+    font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    border-radius: 10px;
-    transition: 0.2s;
+    border-radius: 8px;
+    transition: 0.15s;
 }
 
 .tab-btn.active {
-    background: var(--blue);
-    color: white;
+    background: white;
+    color: #007aff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-.form-group {
-    margin-bottom: 18px;
-}
+.form-group { margin-bottom: 16px; }
 
 .form-group label {
     display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    color: #9ba3af;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-bottom: 8px;
+    letter-spacing: 0.7px;
+    margin-bottom: 7px;
 }
 
 .form-group input {
     width: 100%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 13px 16px;
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    background: #f4f6f9;
+    border: 1.5px solid #e4e8ef;
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #1a1a2e;
+    font-family: 'DM Sans', sans-serif;
     font-size: 15px;
+    font-weight: 500;
     outline: none;
-    transition: 0.2s;
+    transition: 0.15s;
 }
 
 .form-group input:focus {
-    border-color: var(--sky);
-    background: rgba(56,189,248,0.06);
+    border-color: #007aff;
+    background: #f0f6ff;
 }
 
-.forgot-link {
+.forgot-row {
     text-align: right;
-    margin-bottom: 24px;
+    margin: -8px 0 20px;
 }
 
-.forgot-link a {
-    color: var(--sky);
+.forgot-row a {
+    color: #007aff;
     font-size: 13px;
     text-decoration: none;
+    font-weight: 600;
 }
-
-.forgot-link a:hover { text-decoration: underline; }
 
 .submit-btn {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--sky) 100%);
+    background: #007aff;
     color: white;
     border: none;
-    border-radius: 12px;
-    font-family: 'Outfit', sans-serif;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
-    margin-bottom: 20px;
+    transition: 0.15s;
+    margin-bottom: 16px;
 }
 
-.submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+.submit-btn:hover { background: #0056cc; }
 
 .divider {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 20px 0;
-    color: #475569;
+    color: #9ba3af;
     font-size: 13px;
+    margin: 4px 0 16px;
 }
 
 .divider::before, .divider::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255,255,255,0.08);
+    background: #e4e8ef;
 }
 
 .google-btn {
     width: 100%;
-    padding: 13px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    color: white;
-    font-family: 'Outfit', sans-serif;
+    padding: 12px;
+    background: white;
+    border: 1.5px solid #e4e8ef;
+    border-radius: 10px;
+    color: #1a1a2e;
+    font-family: 'DM Sans', sans-serif;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.15s;
     margin-bottom: 24px;
 }
 
-.google-btn:hover { background: rgba(255,255,255,0.1); }
+.google-btn:hover { border-color: #007aff; background: #f0f6ff; }
 
-.bottom-link {
+.bottom-text {
     text-align: center;
     font-size: 14px;
-    color: #64748b;
+    color: #5a6070;
 }
 
-.bottom-link a { color: var(--sky); text-decoration: none; }
-.bottom-link a:hover { text-decoration: underline; }
+.bottom-text a { color: #007aff; text-decoration: none; font-weight: 600; }
 
-.back-home {
+.back-link {
     text-align: center;
     margin-top: 20px;
 }
 
-.back-home a {
-    color: #475569;
-    font-size: 13px;
-    text-decoration: none;
+.back-link a { color: #9ba3af; font-size: 13px; text-decoration: none; }
+.back-link a:hover { color: #5a6070; }
+
+.forgot-panel, .signup-panel { display: none; }
+
+@media(max-width:480px){
+    .signin-card { padding: 32px 22px; }
 }
-
-.back-home a:hover { color: var(--gray); }
-
-/* FORGOT PASSWORD PANEL */
-.forgot-panel { display: none; }
-.forgot-panel.show { display: block; }
-.signin-panel { display: block; }
-.signin-panel.hide { display: none; }
-.signup-panel { display: none; }
-.signup-panel.show { display: block; }
 </style>
 </head>
 <body>
-
 <div class="signin-page">
   <div class="signin-card">
 
     <div class="signin-logo">
-      <div class="logo-text"><span class="red">Sk</span><span class="blue">yRoute</span></div>
-      <p>Your smart flight comparison platform</p>
+      <div class="logo-text"><span class="red">Sky</span><span class="blue">Route</span></div>
+      <p>Smart flight comparison</p>
     </div>
 
-    <!-- TABS -->
-    <div class="tab-btns" id="authTabs">
+    <div class="tab-bar" id="tabBar">
       <button class="tab-btn active" onclick="showTab('signin')">Sign In</button>
-      <button class="tab-btn" onclick="showTab('signup')">Sign Up</button>
+      <button class="tab-btn" onclick="showTab('signup')">Create Account</button>
     </div>
 
-    <!-- SIGN IN PANEL -->
-    <div class="signin-panel" id="signinPanel">
+    <!-- SIGN IN -->
+    <div id="signinPanel">
       <div class="form-group">
         <label>Email Address</label>
-        <input type="email" id="signinEmail" placeholder="you@example.com">
+        <input type="email" id="siEmail" placeholder="you@example.com">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="signinPass" placeholder="Enter your password">
+        <input type="password" id="siPass" placeholder="Enter your password">
       </div>
-      <div class="forgot-link">
-        <a href="#" onclick="showForgot()">Forgot password?</a>
-      </div>
-      <button class="submit-btn" onclick="handleSignin()">Sign In</button>
-      <div class="divider">or continue with</div>
+      <div class="forgot-row"><a href="#" onclick="showForgot()">Forgot password?</a></div>
+      <button class="submit-btn" onclick="doSignin()">Sign In</button>
+      <div class="divider">or</div>
       <button class="google-btn">🌐 Continue with Google</button>
-      <div class="bottom-link">
-        Don't have an account? <a href="#" onclick="showTab('signup')">Sign up free</a>
-      </div>
+      <div class="bottom-text">No account? <a href="#" onclick="showTab('signup')">Sign up free →</a></div>
     </div>
 
-    <!-- SIGN UP PANEL -->
-    <div class="signup-panel" id="signupPanel">
+    <!-- SIGN UP -->
+    <div id="signupPanel">
       <div class="form-group">
         <label>Full Name</label>
-        <input type="text" placeholder="Your full name">
+        <input type="text" placeholder="Your name">
       </div>
       <div class="form-group">
         <label>Email Address</label>
@@ -248,68 +236,61 @@
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" placeholder="Create a password">
+        <input type="password" placeholder="Create a password (min 8 chars)">
       </div>
       <div class="form-group">
         <label>Confirm Password</label>
         <input type="password" placeholder="Repeat your password">
       </div>
       <button class="submit-btn" style="margin-top:8px">Create Account</button>
-      <div class="divider">or continue with</div>
+      <div class="divider">or</div>
       <button class="google-btn">🌐 Continue with Google</button>
-      <div class="bottom-link">
-        Already have an account? <a href="#" onclick="showTab('signin')">Sign in</a>
-      </div>
+      <div class="bottom-text">Already have an account? <a href="#" onclick="showTab('signin')">Sign in →</a></div>
     </div>
 
-    <!-- FORGOT PASSWORD PANEL -->
-    <div class="forgot-panel" id="forgotPanel">
+    <!-- FORGOT -->
+    <div id="forgotPanel">
       <div style="text-align:center;margin-bottom:24px">
-        <div style="font-size:40px;margin-bottom:12px">🔑</div>
-        <h3 style="color:white;font-size:20px;margin-bottom:6px">Reset your password</h3>
-        <p style="color:#64748b;font-size:14px">Enter your email and we'll send you a reset link</p>
+        <div style="font-size:44px;margin-bottom:12px">🔑</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px">Reset password</h3>
+        <p style="color:#9ba3af;font-size:14px">We'll send a reset link to your email</p>
       </div>
       <div class="form-group">
         <label>Email Address</label>
         <input type="email" placeholder="you@example.com">
       </div>
       <button class="submit-btn">Send Reset Link</button>
-      <div class="bottom-link" style="margin-top:8px">
-        <a href="#" onclick="showTab('signin')">← Back to Sign In</a>
-      </div>
+      <div class="bottom-text"><a href="#" onclick="showTab('signin')">← Back to Sign In</a></div>
     </div>
 
-    <div class="back-home">
-      <a href="index.html">← Back to SkyRoute</a>
-    </div>
-
+    <div class="back-link"><a href="index.html">← Back to SkyRoute</a></div>
   </div>
 </div>
 
 <script>
 function showTab(tab){
-    document.getElementById('signinPanel').style.display = tab === 'signin' ? 'block' : 'none';
-    document.getElementById('signupPanel').style.display = tab === 'signup' ? 'block' : 'none';
-    document.getElementById('forgotPanel').style.display = 'none';
-    document.getElementById('authTabs').style.display = 'flex';
-    document.querySelectorAll('.tab-btn').forEach((b,i) => {
-        b.classList.toggle('active', (tab === 'signin' && i === 0) || (tab === 'signup' && i === 1));
+    document.getElementById("signinPanel").style.display = tab==="signin"?"block":"none";
+    document.getElementById("signupPanel").style.display = tab==="signup"?"block":"none";
+    document.getElementById("forgotPanel").style.display = "none";
+    document.getElementById("tabBar").style.display = "flex";
+    document.querySelectorAll(".tab-btn").forEach((b,i) => {
+        b.classList.toggle("active", (tab==="signin"&&i===0)||(tab==="signup"&&i===1));
     });
 }
 
 function showForgot(){
-    document.getElementById('signinPanel').style.display = 'none';
-    document.getElementById('signupPanel').style.display = 'none';
-    document.getElementById('forgotPanel').style.display = 'block';
-    document.getElementById('authTabs').style.display = 'none';
+    document.getElementById("signinPanel").style.display = "none";
+    document.getElementById("signupPanel").style.display = "none";
+    document.getElementById("forgotPanel").style.display = "block";
+    document.getElementById("tabBar").style.display = "none";
 }
 
-function handleSignin(){
-    const email = document.getElementById('signinEmail').value;
-    const pass = document.getElementById('signinPass').value;
-    if(!email || !pass){ alert('Please fill in all fields'); return; }
-    alert('Sign in successful! (Demo mode)');
-    location.href = 'index.html';
+function doSignin(){
+    const e = document.getElementById("siEmail").value;
+    const p = document.getElementById("siPass").value;
+    if(!e||!p){ alert("Please fill in all fields"); return; }
+    alert("Signed in! (Demo mode)");
+    location.href = "index.html";
 }
 </script>
 </body>
